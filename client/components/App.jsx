@@ -1,6 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {HashRouter as Router, Route} from 'react-router-dom'
 
+import Home from './Home'
+import SendTweet from './SendTweet'
 import {getTweets} from '../actions'
 
 class App extends React.Component {
@@ -11,24 +14,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-      <h1>Welcome to Twitter!</h1>
-      <ul>
-        {this.props.tweets.map(tweet => {
-          return (
-            <li>{tweet.text}</li>
-          )
-        })}
-      </ul>
-      </div>
+      <Router>
+        <div>
+          <h1>Welcome to Twitter!</h1>
+
+          <Route exact path="/" component={Home} />
+          <Route path="/:username/tweet" component={SendTweet} />
+        </div>
+      </Router>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    tweets: state.tweets
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default connect()(App)

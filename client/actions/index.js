@@ -1,4 +1,4 @@
-import {getTweets as apiGetTweets} from '../api/tweets'
+import {getTweets as apiGetTweets, sendTweet as apiSendTweet} from '../api/tweets'
 
 export function getTweets() {
   return dispatch => {
@@ -13,5 +13,14 @@ export function saveTweets(tweets) {
   return {
     type: 'SAVE_TWEETS',
     tweets: tweets,
+  }
+}
+
+export function sendTweet(tweet, username) {
+  return dispatch => {
+    return apiSendTweet(tweet, username)
+    .then(result => {
+      dispatch(getTweets())
+    })
   }
 }

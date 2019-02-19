@@ -14,8 +14,10 @@ router.get('/', (req,res) => {
   })
 })
 
-// POST /api/v1/tweets
+// POST /api/v1/tweets/:username
 router.post('/:username', (req,res) => {
+  console.log(res.body)
+  console.log(req.params)
   const tweet = {
     username: req.params.username,
     text: req.body.text
